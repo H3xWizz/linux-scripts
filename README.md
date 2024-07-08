@@ -16,12 +16,12 @@ To run a script directly from the internet using `wget` or `curl`, copy the link
 Copy and paste this command:
 
 ```bash
-wget -qO- [RAW_SCRIPT_URL] | bash
+wget [RAW_SCRIPT_URL] -O my_script.sh && chmod +x my_script.sh && ./my_script.sh
 ```
 Example:
 
 ```bash
-wget -qO- https://github.com/username/repository/raw/main/scripts/my_script.sh | bash
+wget https://github.com/username/repository/raw/main/scripts/my_script.sh -O my_script.sh && chmod +x my_script.sh && ./my_script.sh
 ```
 
 ### Using curl
@@ -29,12 +29,12 @@ wget -qO- https://github.com/username/repository/raw/main/scripts/my_script.sh |
 Copy and paste this command:
 
 ```bash
-curl -sSL [RAW_SCRIPT_URL] | bash
+curl -sSL [RAW_SCRIPT_URL] -o my_script.sh && chmod +x my_script.sh && ./my_script.sh
 ```
 Example:
 
 ```bash
-curl -sSL https://github.com/username/repository/raw/main/scripts/my_script.sh | bash
+curl -sSL https://github.com/username/repository/raw/main/scripts/my_script.sh -o my_script.sh && chmod +x my_script.sh && ./my_script.sh
 ```
 
 **Replace** `[RAW_SCRIPT_URL]` with the RAW URL of the script you want to run. Ensure the script is from a trusted source before executing it.
