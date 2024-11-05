@@ -1,12 +1,14 @@
 #!/bin/bash
 
-# Check for a percentage argument
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <swap_usage_threshold_percentage>"
-    exit 1
-fi
+# Check for a percentage argument, default to 50 if not provided
+SWAP_THRESHOLD=${1:-50}
 
-SWAP_THRESHOLD=$1
+# Notify the user of the detected swap usage threshold
+if [ "$1" ]; then
+    echo "Custom swap usage threshold detected: $SWAP_THRESHOLD%"
+else
+    echo "No custom threshold provided. Defaulting to 50%."
+fi
 
 # Define file paths
 SWAP_SCRIPT=/usr/local/bin/swap_cleaner.sh
@@ -15,7 +17,6 @@ SWAP_SERVICE=/etc/systemd/system/swap_cleaner.service
 # Stop the systemd service if it's running
 if systemctl is-active --quiet swap_cleaner.service; then
     echo "Stopping the swap_cleaner service..."
-    sudo systemctl disable swap_cleaner.service
     sudo systemctl stop swap_cleaner.service
 fi
 
@@ -36,7 +37,7 @@ echo "Installing swap_cleaner.sh..."
 sudo cat << EOF > "$SWAP_SCRIPT"
 #!/bin/bash -eu
 
-# Set the swap usage threshold from the argument
+# Set the swap usage threshold from the argument or default to 50
 SWAP_THRESHOLD=$SWAP_THRESHOLD
 
 while true; do
