@@ -25,7 +25,7 @@ sudo curl [RAW_SCRIPT_URL] > /tmp/script.sh && sudo sh /tmp/script.sh [parameter
 Example:
 
 ```bash
-sudo curl [[RAW_SCRIPT_URL]](https://github.com/username/repository/raw/main/scripts/my_script.sh) > /tmp/script.sh && sudo sh /tmp/script.sh [parameters]"
+sudo curl https://github.com/username/repository/raw/main/scripts/my_script.sh > /tmp/script.sh && sudo sh /tmp/script.sh parameter1 parameter2"
 ```
 
 **Replace** `[RAW_SCRIPT_URL]` with the RAW URL of the script you want to run. Ensure the script is from a trusted source before executing it.
