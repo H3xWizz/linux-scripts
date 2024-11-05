@@ -5,14 +5,12 @@ sudo apt update
 sudo apt full-upgrade -y
 
 # Install required packages
-sudo apt install curl wget zsh git -y
+sudo apt install curl wget zsh git jq -y
 
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install NVM
-sudo apt install jq -y
-
 latest_version=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')
 
 # Print the latest version
