@@ -15,7 +15,7 @@ while true; do
 
     echo "Used Swap Percentage: $percent%"
 
-    if [ $percent -ge 50 ]; then
+    if [ $percent -ge 60 ]; then
         echo "SWAP has reached $percent%, resetting swap..."
         swapoff -a && swapon -a
     fi
