@@ -11,7 +11,15 @@ sudo apt install curl wget zsh git -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+sudo apt install jq -y
+
+latest_version=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')
+
+# Print the latest version
+echo "Latest NVM version: $latest_version"
+
+# Download the installation script for the latest version of NVM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$latest_version/install.sh | bash
 
 # Add NVM configuration to .bashrc and .zshrc
 echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.bashrc
@@ -60,12 +68,8 @@ chsh -s $(which zsh)
 # Create tmp directory and download JetBrains Toolbox
 mkdir -p ~/tmp
 cd ~/tmp
-wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.4.0.32175.tar.gz
 
-# Extract and run JetBrains Toolbox
-tar -xvf jetbrains-toolbox-2.4.0.32175.tar.gz
-sudo chmod +x jetbrains-toolbox-2.4.0.32175/jetbrains-toolbox
-./jetbrains-toolbox-2.4.0.32175/jetbrains-toolbox
+curl -o- https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/refs/heads/master/jetbrains-toolbox.sh | bash
 
 # Remove tmp directory
 rm ~/tmp -Rf
