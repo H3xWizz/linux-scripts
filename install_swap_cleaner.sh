@@ -95,3 +95,4 @@ sudo systemctl enable swap_cleaner.service
 sudo systemctl start swap_cleaner.service
 
 echo "Installation complete. The swap_cleaner service is now running."
+echo "Type 'systemctl status swap_cleaner.service' to check script status"
