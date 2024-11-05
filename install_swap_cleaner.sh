@@ -2,7 +2,7 @@
 
 # Install the swap cleaner script
 echo "Installing swap_cleaner.sh..."
-cat << 'EOF' > /usr/local/bin/swap_cleaner.sh
+sudo cat << 'EOF' > /usr/local/bin/swap_cleaner.sh
 #!/bin/bash -eu
 
 while true; do
@@ -25,11 +25,11 @@ done
 EOF
 
 # Make the script executable
-chmod +x /usr/local/bin/swap_cleaner.sh
+sudo chmod +x /usr/local/bin/swap_cleaner.sh
 
 # Create the systemd service file
 echo "Creating systemd service..."
-cat << 'EOF' > /etc/systemd/system/swap_cleaner.service
+sudo cat << 'EOF' > /etc/systemd/system/swap_cleaner.service
 [Unit]
 Description=Swap Usage Monitor
 After=network.target
@@ -45,8 +45,8 @@ EOF
 
 # Reload systemd configuration and enable the service
 echo "Reloading systemd daemon and enabling service..."
-systemctl daemon-reload
-systemctl enable swap_cleaner.service
-systemctl start swap_cleaner.service
+sudo systemctl daemon-reload
+sudo systemctl enable swap_cleaner.service
+sudo systemctl start swap_cleaner.service
 
 echo "Installation complete. The swap_cleaner service is now running."
