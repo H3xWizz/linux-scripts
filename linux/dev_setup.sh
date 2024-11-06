@@ -27,9 +27,6 @@ else
     echo "Oh My Zsh is already installed."
 fi
 
-# Switch to Zsh shell
-exec zsh
-
 # Install NVM (Node Version Manager)
 latest_version=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')
 
