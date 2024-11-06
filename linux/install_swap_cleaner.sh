@@ -12,6 +12,8 @@ cat << "EOF"
 |  _  |___) >  <  \ V  V / | |/ / / /     ___) | (__| |  | | |_) | |_\__ \
 |_| |_|____/_/\_\  \_/\_/  |_/___/___|   |____/ \___|_|  |_| .__/ \__|___/
                                                          |_|            
+
+Swap Cleaner Installation Script...
 EOF
 
 # Default values for parameters
