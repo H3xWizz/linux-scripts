@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# PARAMETERS
+# --limit-percent | Value of swap ussage percent to clear swap | DEFAULT: 50
+# --sleep-time    | Time interval (in seconds) between checks  | DEFAULT: 30
+
 clear
 cat << "EOF"
  _   _ _____    __        ___             ____            _       _       
