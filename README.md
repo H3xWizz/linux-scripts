@@ -16,7 +16,7 @@ To run a script directly from the internet using `curl`, copy command and paste 
 Copy and paste this command:
 
 ```bash
-sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/h3xwizz_script.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/h3xwizz_scripts.sh && sudo sh /tmp/h3xwizz_script.sh
+sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/h3xwizz_script.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/h3xwizz_scripts.sh && sudo bash /tmp/h3xwizz_script.sh
 ```
 
 Explore and use the scripts in this repository to automate tasks on your system!
