@@ -19,7 +19,7 @@ SWAP_THRESHOLD=50
 SLEEP_TIME=30
 
 # Parse arguments
-while [[ "$#" -gt 0 ]]; do
+while [ "$#" -gt 0 ]; do
     case $1 in
         --limit-percent)
             SWAP_THRESHOLD="$2"
