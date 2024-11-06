@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Clear the screen and display the header
 clear
 cat << "EOF"
  _   _ _____    __        ___             ____            _       _       
@@ -43,10 +44,9 @@ echo 'alias pn=pnpm' >> ~/.zshrc
 
 # Reload shell configuration
 source ~/.bashrc
-source ~/.zshrc | zsh
 
 # Install the latest LTS version of Node.js
-nvm install --lts # At this moment (when i write script) Latest LTS in nvm is v20.15.0
+nvm install --lts
 nvm use --lts
 
 # Install pnpm
@@ -65,10 +65,10 @@ echo 'export PATH="$PNPM_HOME:$PATH"' >> ~/.zshrc
 source ~/.bashrc
 source ~/.zshrc
 
-# Installing vercel-cli
+# Install vercel-cli
 pnpm i -g vercel@latest
 
-# Connect to vercel account 
+# Connect to vercel account
 vercel login
 vercel whoami
 
@@ -82,28 +82,30 @@ cd ~/tmp
 curl -o- https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/refs/heads/master/jetbrains-toolbox.sh | bash
 
 # Remove tmp directory
-rm ~/tmp -Rf
+rm -rf ~/tmp
 
-#Setting up Github config globals
-echo "Please type your github name:"
+echo "Don't forget to use 'source ~/.zshrc' to reload your Zsh configuration."
+
+# Set up GitHub config globals
+echo "Please type your GitHub name:"
 read ghName
-echo "Please type your github mail:"
+echo "Please type your GitHub email:"
 read ghMail
 
-echo "Setting up gh globals user as: $ghName <$ghMail>"
+echo "Setting up GitHub global user as: $ghName <$ghMail>"
 git config --global user.name "$ghName"
-git config --global user.mail "$ghMail"
+git config --global user.email "$ghMail"
 
-echo "Do you want restart system now? (yes/no)"
+# Ask the user if they want to restart the system
+echo "Do you want to restart the system now? (yes/no)"
 read restartAnswer
 
-# Convert answer to lowercase for case-insensitive comparison
+# Convert the answer to lowercase for case-insensitive comparison
 answer=$(echo "$restartAnswer" | tr '[:upper:]' '[:lower:]')
 
-# Check user's response
-if [[ "$RestartAnswer" == "yes" || "$restartAnswer" == "y" ]]; then
+# Check the user's response
+if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
     sudo reboot
-    # Place your script commands here
 elif [[ "$answer" == "no" || "$answer" == "n" ]]; then
     echo "Stopping the script."
     exit 0
