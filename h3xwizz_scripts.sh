@@ -18,7 +18,7 @@ EOF
 function cleaningUp() {
     echo "Cleaning up..."
     sudo rm -f /tmp/$1.sh
-    sudo rm -f /tmp/h3xwizz_scripts.sh
+    sudo rm -f /tmp/h3xwizz_script.sh
     echo "Bye!"
 }
 
