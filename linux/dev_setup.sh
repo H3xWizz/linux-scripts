@@ -20,31 +20,43 @@ sudo apt full-upgrade -y
 # Install required packages
 sudo apt install curl wget zsh git jq -y
 
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Install Oh My Zsh if not already installed
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+    echo "Oh My Zsh is already installed."
+fi
 
-# Change to Zsh for the remainder of the script
+# Switch to Zsh shell
 exec zsh
 
-# Install NVM
+# Install NVM (Node Version Manager)
 latest_version=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')
 
 # Print the latest version
 echo "Latest NVM version: $latest_version"
 
-# Download the installation script for the latest version of NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$latest_version/install.sh | zsh
+# Install or update NVM
+if [ ! -d "$HOME/.nvm" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$latest_version/install.sh | zsh
+else
+    echo "NVM is already installed. Updating..."
+    cd "$HOME/.nvm" && git fetch --tags && git checkout $latest_version && cd -
+fi
 
-# Load NVM and install Node.js
+# Load NVM
 export NVM_DIR="$HOME/.nvm"
-source "$NVM_DIR/nvm.sh"  # Load NVM
-nvm install --lts          # Install the latest LTS version of Node.js
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+
+# Install Node.js and use the latest LTS version
+nvm install --lts
 nvm use --lts
 
-# Install pnpm
+# Install pnpm globally using npm
 npm install -g pnpm
 
-# Configure pnpm for global packages
+# Configure pnpm
 pnpm setup
 
 # Add pnpm configuration to .zshrc
@@ -54,27 +66,28 @@ echo 'export PATH="$PNPM_HOME:$PATH"' >> ~/.zshrc
 # Reload shell configuration
 source ~/.zshrc
 
-# Install vercel-cli
+# Install vercel-cli using pnpm
 pnpm install -g vercel@latest
 
-# Connect to Vercel account
+# Log into Vercel account and display account information
 vercel login
 vercel whoami
 
 # Set Zsh as the default shell
 chsh -s $(which zsh)
 
-# Create tmp directory and download JetBrains Toolbox
+# Download and run JetBrains Toolbox installation script
 mkdir -p ~/tmp
 cd ~/tmp
 curl -o- https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/refs/heads/master/jetbrains-toolbox.sh | zsh
 
-# Remove tmp directory
+# Clean up temporary files
 rm -rf ~/tmp
 
+# Remind the user to reload Zsh configuration
 echo "Don't forget to use 'source ~/.zshrc' to reload your Zsh configuration."
 
-# Set up GitHub config globals
+# Set up GitHub global configuration
 echo "Please type your GitHub name:"
 read ghName
 echo "Please type your GitHub email:"
@@ -95,7 +108,7 @@ answer=$(echo "$restartAnswer" | tr '[:upper:]' '[:lower:]')
 if [[ "$answer" == "yes" || "$answer" == "y" ]]; then
     sudo reboot
 elif [[ "$answer" == "no" || "$answer" == "n" ]]; then
-    echo "Stopping the script."
+    echo "Setup complete. You chose not to restart."
     exit 0
 else
     echo "Invalid response. Please enter 'yes' or 'no'."
