@@ -60,9 +60,6 @@ pnpm setup
 echo 'export PNPM_HOME="$HOME/.local/share/pnpm"' >> ~/.zshrc
 echo 'export PATH="$PNPM_HOME:$PATH"' >> ~/.zshrc
 
-# Reload shell configuration
-source ~/.zshrc
-
 # Install vercel-cli using pnpm
 pnpm install -g vercel@latest
 
