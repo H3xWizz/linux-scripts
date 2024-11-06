@@ -10,15 +10,31 @@ cat << "EOF"
                                                          |_|            
 EOF
 
-# Check for a percentage argument, default to 50 if not provided
-SWAP_THRESHOLD=${1:-50}
+# Default values for parameters
+SWAP_THRESHOLD=50
+SLEEP_TIME=30
 
-# Notify the user of the detected swap usage threshold
-if [ "$1" ]; then
-    echo "Custom swap usage threshold detected: $SWAP_THRESHOLD%"
-else
-    echo "No custom threshold provided. Defaulting to 50%."
-fi
+# Parse arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --limit-percent)
+            SWAP_THRESHOLD="$2"
+            shift 2
+            ;;
+        --sleep-time)
+            SLEEP_TIME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
+
+# Notify the user of the detected swap usage threshold and sleep time
+echo "Swap usage threshold set to: $SWAP_THRESHOLD%"
+echo "Sleep time set to: $SLEEP_TIME seconds"
 
 # Define file paths
 SWAP_SCRIPT=/usr/local/bin/swap_cleaner.sh
@@ -47,8 +63,9 @@ echo "Installing swap_cleaner.sh..."
 sudo cat << EOF > "$SWAP_SCRIPT"
 #!/bin/bash -eu
 
-# Set the swap usage threshold from the argument or default to 50
+# Set the swap usage threshold and sleep time
 SWAP_THRESHOLD=$SWAP_THRESHOLD
+SLEEP_TIME=$SLEEP_TIME
 
 while true; do
     total=\$(awk '/SwapTotal:/{print \$2}' /proc/meminfo)
@@ -65,7 +82,7 @@ while true; do
         swapoff -a && swapon -a
     fi
 
-    sleep 30
+    sleep \$SLEEP_TIME
 done
 EOF
 
