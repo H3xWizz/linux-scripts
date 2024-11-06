@@ -1,34 +1,22 @@
+# H3xWizz scripts
 
-# Linux scripts
+Welcome to the H3xWizz Scripts Repository! This repository contains various scripts that can help automate tasks on your system.
 
+<hr>
 
+## Linux/MacOS
 
-# Linux Scripts Repository
+### Running Scripts
 
-Welcome to the Linux Scripts Repository! This repository contains various scripts that can help automate tasks on your Linux system.
+To run a script directly from the internet using `curl`, copy command and paste to your terminal:
 
-## Running Scripts
-
-To run a script directly from the internet using `curl`, copy the link to the script file in RAW mode and execute the following command in your terminal:
-
-### Using wget
-
-Copy and paste this command:
 
 ### Using curl
 
 Copy and paste this command:
 
 ```bash
-
-sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/script.sh [RAW_SCRIPT_URL] && sudo sh /tmp/script.sh [parameters]
-```
-Example:
-
-```bash
-sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/script.sh https://github.com/username/repository/raw/main/scripts/my_script.sh && sudo sh /tmp/script.sh parameter1 parameter2
+sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/h3xwizz_script.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/h3xwizz_scripts.sh && sudo sh /tmp/h3xwizz_script.sh
 ```
 
-**Replace** `[RAW_SCRIPT_URL]` with the RAW URL of the script you want to run. Ensure the script is from a trusted source before executing it.
-
-Explore and use the scripts in this repository to automate tasks on your Linux system!
+Explore and use the scripts in this repository to automate tasks on your system!
