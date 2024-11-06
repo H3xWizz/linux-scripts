@@ -21,12 +21,12 @@ Copy and paste this command:
 
 ```bash
 
-sudo curl -o /tmp/script.sh [RAW_SCRIPT_URL] && sudo sh /tmp/script.sh [parameters]
+sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/script.sh [RAW_SCRIPT_URL] && sudo sh /tmp/script.sh [parameters]
 ```
 Example:
 
 ```bash
-sudo curl -o /tmp/script.sh https://github.com/username/repository/raw/main/scripts/my_script.sh && sudo sh /tmp/script.sh parameter1 parameter2
+sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/script.sh https://github.com/username/repository/raw/main/scripts/my_script.sh && sudo sh /tmp/script.sh parameter1 parameter2
 ```
 
 **Replace** `[RAW_SCRIPT_URL]` with the RAW URL of the script you want to run. Ensure the script is from a trusted source before executing it.
