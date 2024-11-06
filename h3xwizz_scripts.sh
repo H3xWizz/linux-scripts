@@ -36,14 +36,14 @@ function linuxScriptsMenu() {
         case $choice in
             1)
                 echo "Running Dev Setup..."
-                dev_command='sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/dev_setup.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/dev_setup.sh && sudo /tmp/dev_setup.sh'
+                dev_command='sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/dev_setup.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/dev_setup.sh && sudo bash /tmp/dev_setup.sh'
                 eval $dev_command
                 cleaningUp "dev_setup"
                 break
                 ;;
             2)
                 echo "Running Install Swap Cleaner..."
-                swap_command='sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/install_swap_cleaner.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/install_swap_cleaner.sh && sudo /tmp/install_swap_cleaner.sh'
+                swap_command='sudo curl -H "Cache-Control: no-cache, no-store, must-revalidate" -o /tmp/install_swap_cleaner.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/install_swap_cleaner.sh && sudo bash /tmp/install_swap_cleaner.sh'
 
                 # Prompt the user for --limit-percent value
                 echo -n "--limit-percent (DEFAULT: 50): "
