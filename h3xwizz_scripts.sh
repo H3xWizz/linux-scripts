@@ -14,14 +14,6 @@ Swap Cleaner Installation Script...
 EOF
 }
 
-# Function to clean up temporary files
-function cleaningUp() {
-    echo "Cleaning up..."
-    sudo rm -f /tmp/$1.sh
-    sudo rm -f /tmp/h3xwizz_script.sh
-    echo "Bye!"
-}
-
 # Function to display the Linux scripts menu
 function linuxScriptsMenu() {
     while true; do
@@ -38,7 +30,7 @@ function linuxScriptsMenu() {
                 echo "Running Dev Setup..."
                 dev_command='sudo curl -sL https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/dev_setup.sh | sudo -E bash -'
                 eval $dev_command
-                cleaningUp "dev_setup"
+                echo "Bye..."
                 break
                 ;;
             2)
@@ -61,11 +53,11 @@ function linuxScriptsMenu() {
 
                 # Execute the swap cleaner command
                 eval $swap_command
-                cleaningUp "install_swap_cleaner"
+                echo "Bye..."
                 break
                 ;;
             3)
-                echo "Exiting..."
+                echo "Bye..."
                 break
                 ;;
             *)
