@@ -28,14 +28,14 @@ function linuxScriptsMenu() {
         case $choice in
             1)
                 echo "Running Dev Setup..."
-                dev_command='sudo curl -sL https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/dev_setup.sh | sudo -E bash -'
+                dev_command='bash <(curl -sL https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/dev_setup.sh)'
                 eval $dev_command
                 echo "Bye..."
                 break
                 ;;
             2)
                 echo "Running Install Swap Cleaner..."
-                swap_command='sudo curl -sL https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/install_swap_cleaner.sh | sudo -E bash -'
+                swap_command='curl -sL -o /tmp/h3xwizz_script.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/install_swap_cleaner.sh && sudo bash /tmp/h3xwizz_script.sh'
 
                 # Prompt the user for --limit-percent value
                 echo -n "--limit-percent (DEFAULT: 50): "
@@ -53,6 +53,8 @@ function linuxScriptsMenu() {
 
                 # Execute the swap cleaner command
                 eval $swap_command
+                echo "Cleaning up..."
+                sudo rm /tmp/h3xwizz_script.sh -Rf
                 echo "Bye..."
                 break
                 ;;
