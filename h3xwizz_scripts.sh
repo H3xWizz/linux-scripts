@@ -37,19 +37,24 @@ function linuxScriptsMenu() {
                 echo "Running Install Swap Cleaner..."
                 swap_command='curl -sL -o /tmp/h3xwizz_script.sh https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/linux/install_swap_cleaner.sh && sudo bash /tmp/h3xwizz_script.sh'
 
-                # Prompt the user for --limit-percent value
+                # Prompt the user for --limit-percent value, with a default of 50
                 echo -n "--limit-percent (DEFAULT: 50): "
                 read limit_percent
-                if [ -n "$limit_percent" ]; then
-                    swap_command+=" --limit-percent $limit_percent"
+                if [ -z "$limit_percent" ]; then
+                    limit_percent=50  # Use default if no input is provided
                 fi
-
-                # Prompt the user for --sleep-time value
+                swap_command+=" --limit-percent $limit_percent"
+                
+                # Prompt the user for --sleep-time value, with a default of 30
                 echo -n "--sleep-time (DEFAULT: 30): "
                 read sleep_time
-                if [ -n "$sleep_time" ]; then
-                    swap_command+=" --sleep-time $sleep_time"
+                if [ -z "$sleep_time" ]; then
+                    sleep_time=30  # Use default if no input is provided
                 fi
+                swap_command+=" --sleep-time $sleep_time"
+                
+                # Print and execute the final swap_command
+                echo "Running command: $swap_command"
 
                 # Execute the swap cleaner command
                 eval $swap_command
