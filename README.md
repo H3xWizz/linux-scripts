@@ -16,7 +16,7 @@ To run a script directly from the internet using `curl`, copy command and paste 
 Copy and paste this command:
 
 ```bash
-sh <(curl -sL https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/h3xwizz_scripts.sh)
+bash <(curl -sL https://raw.githubusercontent.com/H3xWizz/h3xwizz-scripts/refs/heads/main/h3xwizz_scripts.sh)
 ```
 
 Explore and use the scripts in this repository to automate tasks on your system!
