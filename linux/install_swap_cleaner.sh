@@ -69,26 +69,26 @@ echo "Installing swap_cleaner.sh..."
 sudo cat << EOF > "$SWAP_SCRIPT"
 #!/bin/bash -eu
 
-# Set the swap usage threshold and sleep time
-echo "SWAP_THRESHOLD is setted to: $SWAP_THRESHOLD"
-echo "SLEEP_TIME is setted to: $SLEEP_TIME"
+# Set the swap usage threshold and sleep time from environment variables
+echo "SWAP_THRESHOLD is set to: $SWAP_THRESHOLD%"
+echo "SLEEP_TIME is set to: $SLEEP_TIME sec"
 
 while true; do
-    total=\$(awk '/SwapTotal:/{print \$2}' /proc/meminfo)
-    free=\$(awk '/SwapFree:/{print \$2}' /proc/meminfo)
-    [ \$total -eq 0 ] && continue
+    total=$(awk '/SwapTotal:/{print $2}' /proc/meminfo)
+    free=$(awk '/SwapFree:/{print $2}' /proc/meminfo)
+    [ $total -eq 0 ] && continue
 
-    used=\$((total - free))
-    percent=\$((used * 100 / total))
+    used=$((total - free))
+    percent=$((used * 100 / total))
 
-    echo "Used Swap Percentage: \$percent%"
+    echo "Used Swap Percentage: $percent%"
 
-    if [ \$percent -ge \$SWAP_THRESHOLD ]; then
-        echo "SWAP has reached \$percent%, resetting swap..."
+    if [ $percent -ge $SWAP_THRESHOLD ]; then
+        echo "SWAP has reached $percent%, resetting swap..."
         swapoff -a && swapon -a
     fi
 
-    sleep \$SLEEP_TIME
+    sleep $SLEEP_TIME
 done
 EOF
 
@@ -103,6 +103,8 @@ Description=Swap Usage Monitor
 After=network.target
 
 [Service]
+Environment=SWAP_THRESHOLD=$SWAP_THRESHOLD
+Environment=SLEEP_TIME=$SLEEP_TIME
 ExecStart=$SWAP_SCRIPT
 Restart=always
 User=root
