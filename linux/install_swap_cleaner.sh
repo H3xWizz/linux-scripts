@@ -70,8 +70,8 @@ sudo cat << EOF > "$SWAP_SCRIPT"
 #!/bin/bash -eu
 
 # Set the swap usage threshold and sleep time
-SWAP_THRESHOLD=$SWAP_THRESHOLD
-SLEEP_TIME=$SLEEP_TIME
+echo "SWAP_THRESHOLD is setted to: $SWAP_THRESHOLD"
+echo "SLEEP_TIME is setted to: $SLEEP_TIME"
 
 while true; do
     total=\$(awk '/SwapTotal:/{print \$2}' /proc/meminfo)
